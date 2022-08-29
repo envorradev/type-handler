@@ -1,0 +1,30 @@
+{
+    "name": "envorradev/type-handler",
+    "require": {
+        "php": "^8.1",
+        "illuminate/collections": "^9"
+    },
+    "require-dev": {
+        "orchestra/testbench": "*",
+        "ramsey/composer-repl": "*",
+        "phpstan/phpstan": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Envorra\\TypeHandler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Envorra\\TypeHandler\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sam Taylor",
+            "email": "15961687+samueljtaylor@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
