@@ -2,8 +2,8 @@
 
 namespace Envorra\TypeHandler\Types\AbstractTypes;
 
-use Envorra\TypeHandler\Contracts\Primitive;
-use Envorra\TypeHandler\Contracts\NonPrimitive;
+use Envorra\TypeHandler\Contracts\Types\Primitive;
+use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
 
 /**
  * NonPrimitiveType
@@ -13,7 +13,7 @@ use Envorra\TypeHandler\Contracts\NonPrimitive;
  * @template TNonPrimitive
  *
  * @extends AbstractType<TNonPrimitive>
- * @implements NonPrimitive<TNonPrimitive>
+ * @implements \Envorra\TypeHandler\Contracts\Types\NonPrimitive<TNonPrimitive>
  */
 abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
 {

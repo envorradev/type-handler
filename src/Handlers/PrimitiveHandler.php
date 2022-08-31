@@ -2,8 +2,7 @@
 
 namespace Envorra\TypeHandler\Handlers;
 
-use Envorra\TypeHandler\Contracts\PackageConstants;
-use Envorra\TypeHandler\Contracts\Primitive;
+use Envorra\TypeHandler\Contracts\Types\Primitive;
 use Envorra\TypeHandler\Exceptions\PrimitiveHandlerException;
 
 /**
@@ -11,7 +10,7 @@ use Envorra\TypeHandler\Exceptions\PrimitiveHandlerException;
  *
  * @package Envorra\TypeHandler\Handlers
  *
- * @extends AbstractHandler<Primitive>
+ * @extends AbstractHandler<\Envorra\TypeHandler\Contracts\Types\Primitive>
  */
 class PrimitiveHandler extends AbstractHandler
 {
@@ -22,7 +21,7 @@ class PrimitiveHandler extends AbstractHandler
     {
         $dataType = gettype($this->getValue());
 
-        /** @var Primitive $type */
+        /** @var \Envorra\TypeHandler\Contracts\Types\Primitive $type */
         $type = static::NAMESPACE_PRIMITIVES.strtr(static::PATTERN_PRIMITIVE_CLASS, ['{$dataType}' => ucwords($dataType)]);
 
         if(class_exists($type) && in_array(Primitive::class, class_implements($type))) {

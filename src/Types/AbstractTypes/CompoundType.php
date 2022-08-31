@@ -2,7 +2,7 @@
 
 namespace Envorra\TypeHandler\Types\AbstractTypes;
 
-use Envorra\TypeHandler\Contracts\Compound;
+use Envorra\TypeHandler\Contracts\Types\Compound;
 
 /**
  * CompoundType
@@ -16,5 +16,11 @@ use Envorra\TypeHandler\Contracts\Compound;
  */
 abstract class CompoundType extends PrimitiveType implements Compound
 {
-
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
+    {
+        return json_encode($this->getValue());
+    }
 }

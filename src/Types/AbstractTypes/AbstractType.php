@@ -3,11 +3,11 @@
 namespace Envorra\TypeHandler\Types\AbstractTypes;
 
 use ReflectionClass;
-use Envorra\TypeHandler\Contracts\Type;
-use Envorra\TypeHandler\Contracts\Scalar;
-use Envorra\TypeHandler\Contracts\Compound;
-use Envorra\TypeHandler\Contracts\Primitive;
-use Envorra\TypeHandler\Contracts\NonPrimitive;
+use Envorra\TypeHandler\Contracts\Types\Type;
+use Envorra\TypeHandler\Contracts\Types\Scalar;
+use Envorra\TypeHandler\Contracts\Types\Compound;
+use Envorra\TypeHandler\Contracts\Types\Primitive;
+use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
 
 /**
  * AbstractType

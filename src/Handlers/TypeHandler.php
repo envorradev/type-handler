@@ -2,9 +2,9 @@
 
 namespace Envorra\TypeHandler\Handlers;
 
-use Envorra\TypeHandler\Contracts\Type;
-use Envorra\TypeHandler\Contracts\Primitive;
+use Envorra\TypeHandler\Contracts\Types\Type;
 use Envorra\TypeHandler\OldTypes\TimestampType;
+use Envorra\TypeHandler\Contracts\Types\Primitive;
 use Envorra\TypeHandler\OldTypes\Primitives\ObjectType;
 use Envorra\TypeHandler\OldTypes\Primitives\IntegerType;
 
@@ -13,7 +13,7 @@ use Envorra\TypeHandler\OldTypes\Primitives\IntegerType;
  *
  * @package Envorra\TypeHandler\Handlers
  *
- * @extends AbstractHandler<Type|Primitive>
+ * @extends AbstractHandler<\Envorra\TypeHandler\Contracts\Types\Type|\Envorra\TypeHandler\Contracts\Types\Primitive>
  */
 class TypeHandler extends AbstractHandler
 {
@@ -33,7 +33,7 @@ class TypeHandler extends AbstractHandler
     }
 
     /**
-     * @return Type|null
+     * @return \Envorra\TypeHandler\Contracts\Types\Type|null
      */
     protected function handleObjectType(): ?Type
     {
@@ -41,7 +41,7 @@ class TypeHandler extends AbstractHandler
     }
 
     /**
-     * @return Type|null
+     * @return \Envorra\TypeHandler\Contracts\Types\Type|null
      */
     protected function handleIntegerType(): ?Type
     {

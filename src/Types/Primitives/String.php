@@ -2,8 +2,8 @@
 
 namespace Envorra\TypeHandler\Types\Primitives;
 
-use Envorra\TypeHandler\Contracts\StringTypeContract;
 use Envorra\TypeHandler\Types\AbstractTypes\AbstractType;
+use Envorra\TypeHandler\Contracts\Types\StringContract;
 
 /**
  * StringType
@@ -12,7 +12,7 @@ use Envorra\TypeHandler\Types\AbstractTypes\AbstractType;
  *
  * @extends AbstractType<string>
  */
-final class StringType extends AbstractType implements StringTypeContract
+final class String extends AbstractType implements StringContract
 {
     /**
      * @inheritDoc

@@ -1,6 +1,6 @@
 <?php
 
-namespace Envorra\TypeHandler\Contracts;
+namespace Envorra\TypeHandler\Contracts\Types;
 
 /**
  * Scalar

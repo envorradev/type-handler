@@ -1,6 +1,6 @@
 <?php
 
-namespace Envorra\TypeHandler\Contracts;
+namespace Envorra\TypeHandler\Contracts\Types;
 
 /**
  * PrimitiveString
@@ -9,7 +9,7 @@ namespace Envorra\TypeHandler\Contracts;
  *
  * @extends Type<string>
  */
-interface StringTypeContract extends Type
+interface StringContract extends Type
 {
 
 }

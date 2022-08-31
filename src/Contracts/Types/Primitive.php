@@ -1,6 +1,6 @@
 <?php
 
-namespace Envorra\TypeHandler\Contracts;
+namespace Envorra\TypeHandler\Contracts\Types;
 
 /**
  * @Primitive
@@ -14,7 +14,7 @@ namespace Envorra\TypeHandler\Contracts;
 interface Primitive extends Type
 {
     /**
-     * @return StringTypeContract
+     * @return StringContract
      */
-    public function toString(): StringTypeContract;
+    public function toString(): StringContract;
 }
