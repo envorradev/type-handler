@@ -3,7 +3,7 @@
 namespace Envorra\TypeHandler\Types\AbstractTypes;
 
 use Envorra\TypeHandler\Contracts\Types\Primitive;
-use Envorra\TypeHandler\Types\Primitives\String;
+use Envorra\TypeHandler\Types\Primitives\StringType;
 use Envorra\TypeHandler\Contracts\Types\StringContract;
 
 /**
@@ -14,7 +14,7 @@ use Envorra\TypeHandler\Contracts\Types\StringContract;
  * @template TPrimitive
  *
  * @extends AbstractType<TPrimitive>
- * @implements \Envorra\TypeHandler\Contracts\Types\Primitive<TPrimitive>
+ * @implements Primitive<TPrimitive>
  */
 abstract class PrimitiveType extends AbstractType implements Primitive
 {
@@ -23,6 +23,6 @@ abstract class PrimitiveType extends AbstractType implements Primitive
      */
     public function toString(): StringContract
     {
-        return String::from((string) $this->getValue());
+        return StringType::from((string) $this->getValue());
     }
 }

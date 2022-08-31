@@ -10,9 +10,9 @@ use Envorra\TypeHandler\Contracts\Types\StringContract;
  *
  * @package Envorra\TypeHandler\Types
  *
- * @extends AbstractType<string>
+ * @extends AbstractType<StringType>
  */
-final class String extends AbstractType implements StringContract
+final class StringType extends AbstractType implements StringContract
 {
     /**
      * @inheritDoc

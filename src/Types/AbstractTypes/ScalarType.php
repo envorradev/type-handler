@@ -12,7 +12,7 @@ use Envorra\TypeHandler\Contracts\Types\Scalar;
  * @template TScalar
  *
  * @extends PrimitiveType<TScalar>
- * @implements \Envorra\TypeHandler\Contracts\Types\Scalar<TScalar>
+ * @implements Scalar<TScalar>
  */
 abstract class ScalarType extends PrimitiveType implements Scalar
 {

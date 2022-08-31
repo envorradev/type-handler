@@ -13,7 +13,7 @@ use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
  * @template TNonPrimitive
  *
  * @extends AbstractType<TNonPrimitive>
- * @implements \Envorra\TypeHandler\Contracts\Types\NonPrimitive<TNonPrimitive>
+ * @implements NonPrimitive<TNonPrimitive>
  */
 abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
 {
