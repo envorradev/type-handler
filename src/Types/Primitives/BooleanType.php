@@ -5,13 +5,13 @@ namespace Envorra\TypeHandler\Types\Primitives;
 use Envorra\TypeHandler\Types\AbstractTypes\ScalarType;
 
 /**
- * IntegerType
+ * BooleanType
  *
  * @package Envorra\TypeHandler\Types
  *
- * @extends ScalarType<integer>
+ * @extends ScalarType<boolean>
  */
-final class IntegerType extends ScalarType
+final class BooleanType extends ScalarType
 {
 
 }

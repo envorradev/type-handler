@@ -4,9 +4,9 @@ namespace Envorra\TypeHandler\Handlers;
 
 use Envorra\TypeHandler\Contracts\Type;
 use Envorra\TypeHandler\Contracts\Primitive;
-use Envorra\TypeHandler\Types\TimestampType;
-use Envorra\TypeHandler\Types\Primitives\ObjectType;
-use Envorra\TypeHandler\Types\Primitives\IntegerType;
+use Envorra\TypeHandler\OldTypes\TimestampType;
+use Envorra\TypeHandler\OldTypes\Primitives\ObjectType;
+use Envorra\TypeHandler\OldTypes\Primitives\IntegerType;
 
 /**
  * TypeHandler

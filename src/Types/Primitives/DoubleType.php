@@ -2,16 +2,16 @@
 
 namespace Envorra\TypeHandler\Types\Primitives;
 
-use Envorra\TypeHandler\Types\AbstractTypes\PrimitiveDataType;
+use Envorra\TypeHandler\Types\AbstractTypes\ScalarType;
 
 /**
  * DoubleType
  *
- * @package Envorra\TypeHandler\Types\Primitives
+ * @package Envorra\TypeHandler\Types
  *
- * @extends PrimitiveDataType<double>
+ * @extends ScalarType<double>
  */
-final class DoubleType extends PrimitiveDataType
+final class DoubleType extends ScalarType
 {
 
 }

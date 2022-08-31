@@ -2,17 +2,16 @@
 
 namespace Envorra\TypeHandler\Types\Primitives;
 
-
-use Envorra\TypeHandler\Types\AbstractTypes\CompoundDataType;
+use Envorra\TypeHandler\Types\AbstractTypes\CompoundType;
 
 /**
- * @ObjectType
+ * ObjectType
  *
  * @package Envorra\TypeHandler\Types
  *
- * @extends CompoundDataType<object>
+ * @extends CompoundType<object>
  */
-final class ObjectType extends CompoundDataType
+final class ObjectType extends CompoundType
 {
 
 }

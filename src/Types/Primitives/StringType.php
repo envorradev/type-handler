@@ -2,48 +2,23 @@
 
 namespace Envorra\TypeHandler\Types\Primitives;
 
-
-use Stringable;
-use Envorra\TypeHandler\Contracts\PrimitiveString;
+use Envorra\TypeHandler\Contracts\StringTypeContract;
+use Envorra\TypeHandler\Types\AbstractTypes\AbstractType;
 
 /**
- * @StringType
+ * StringType
  *
  * @package Envorra\TypeHandler\Types
+ *
+ * @extends AbstractType<string>
  */
-final class StringType implements PrimitiveString
+final class StringType extends AbstractType implements StringTypeContract
 {
     /**
      * @inheritDoc
      */
-    public function __construct(
-        protected string $value = ''
-    ) {}
-
-
-    /**
-     * @inheritDoc
-     */
-    public function getValue(): string
+    public function isScalar(): bool
     {
-        return $this->value;
+        return true;
     }
-
-
-    /**
-     * @inheritDoc
-     */
-    public static function make(string $value): self
-    {
-        return new self($value);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function from(string|Stringable|null $value): self
-    {
-        return new self((string) $value);
-    }
-
 }

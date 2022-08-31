@@ -5,13 +5,13 @@ namespace Envorra\TypeHandler\Types\Primitives;
 use Envorra\TypeHandler\Types\AbstractTypes\CompoundType;
 
 /**
- * ArrayType
+ * CallableType
  *
  * @package Envorra\TypeHandler\Types
  *
- * @extends CompoundType<array>
+ * @extends CompoundType<callable>
  */
-final class ArrayType extends CompoundType
+final class CallableType extends CompoundType
 {
 
 }

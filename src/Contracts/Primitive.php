@@ -2,46 +2,19 @@
 
 namespace Envorra\TypeHandler\Contracts;
 
-use Stringable;
-
 /**
  * @Primitive
  *
  * @package Envorra\TypeHandler\Contracts
  *
  * @template TPrimitive
+ *
+ * @extends Type<TPrimitive>
  */
-interface Primitive extends Stringable
+interface Primitive extends Type
 {
     /**
-     * @param  TPrimitive|null  $value
+     * @return StringTypeContract
      */
-    public function __construct(mixed $value = null, bool $castToType = false);
-
-    /**
-     * @return TPrimitive
-     */
-    public function getValue(): mixed;
-
-    /**
-     * @return mixed
-     */
-    public function getOriginal(): mixed;
-
-    /**
-     * @param  TPrimitive  $value
-     * @return static
-     */
-    public static function make(mixed $value): static;
-
-    /**
-     * @param  mixed  $value
-     * @return static
-     */
-    public static function from(mixed $value): static;
-
-    /**
-     * @return PrimitiveString
-     */
-    public function toString(): PrimitiveString;
+    public function toString(): StringTypeContract;
 }
