@@ -14,7 +14,7 @@ use Stringable;
 interface Type extends Stringable
 {
     /**
-     * @param  T|null  $value
+     * @param  T|Type|null  $value
      */
     public function __construct(mixed $value = null);
 
@@ -61,14 +61,13 @@ interface Type extends Stringable
     public function isIn(array $types = []): bool;
 
     /**
-     * @param  T  $value
+     * @param  T|Type|null  $value
      * @return static
      */
-    public static function make(mixed $value): static;
+    public static function make(mixed $value = null): static;
 
     /**
-     * @param  mixed  $value
-     * @return static
+     * @return string
      */
-    public static function from(mixed $value): static;
+    public static function type(): string;
 }

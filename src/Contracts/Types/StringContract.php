@@ -7,9 +7,9 @@ namespace Envorra\TypeHandler\Contracts\Types;
  *
  * @package Envorra\TypeHandler\Contracts
  *
- * @extends Type<string>
+ * @extends Primitive<string>
  */
-interface StringContract extends Type
+interface StringContract extends Primitive
 {
 
 }

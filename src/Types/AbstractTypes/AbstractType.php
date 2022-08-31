@@ -22,13 +22,20 @@ abstract class AbstractType implements Type
 {
     protected mixed $original;
 
-    protected ReflectionClass $reflection;
-
     /**
      * @inheritDoc
      */
-    public function __construct(protected mixed $value = null) {
+    public function __construct(protected mixed $value = null)
+    {
+        if($this->value instanceof Type) {
+            $this->value = $this->value->getValue();
+        }
+
         $this->original = $this->value;
+
+        if(!$this->isIncomingValueCorrectType($this->value)) {
+            $this->value = $this->castIncomingValue($this->value);
+        }
     }
 
     /**
@@ -52,7 +59,7 @@ abstract class AbstractType implements Type
      */
     public function isPrimitive(): bool
     {
-        return $this->reflection()->implementsInterface(Primitive::class);
+        return static::reflection()->implementsInterface(Primitive::class);
     }
 
     /**
@@ -60,7 +67,7 @@ abstract class AbstractType implements Type
      */
     public function isScalar(): bool
     {
-        return $this->reflection()->implementsInterface(Scalar::class);
+        return static::reflection()->implementsInterface(Scalar::class);
     }
 
     /**
@@ -68,7 +75,7 @@ abstract class AbstractType implements Type
      */
     public function isCompound(): bool
     {
-        return $this->reflection()->implementsInterface(Compound::class);
+        return static::reflection()->implementsInterface(Compound::class);
     }
 
     /**
@@ -76,7 +83,7 @@ abstract class AbstractType implements Type
      */
     public function isNonPrimitive(): bool
     {
-        return $this->reflection()->implementsInterface(NonPrimitive::class);
+        return static::reflection()->implementsInterface(NonPrimitive::class);
     }
 
     /**
@@ -84,7 +91,15 @@ abstract class AbstractType implements Type
      */
     public function is(Type|string|null $type = null): bool
     {
-        return get_class($this) === get_class($type);
+        if($type) {
+
+            if($type instanceof Type) {
+                $type = get_class($type);
+            }
+
+            return get_class($this) === $type;
+        }
+        return false;
     }
 
     /**
@@ -103,16 +118,30 @@ abstract class AbstractType implements Type
     /**
      * @return ReflectionClass
      */
-    protected function reflection(): ReflectionClass
+    protected static function reflection(): ReflectionClass
     {
-        $this->reflection ??= new ReflectionClass($this);
-        return $this->reflection;
+        return new ReflectionClass(static::class);
     }
+
+    /**
+     * @param  mixed  $value
+     * @return bool
+     */
+    protected function isIncomingValueCorrectType(mixed $value): bool
+    {
+        return gettype($value) === static::type();
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return T
+     */
+    abstract protected function castIncomingValue(mixed $value): mixed;
 
     /**
      * @inheritDoc
      */
-    public static function make(mixed $value): static
+    public static function make(mixed $value = null): static
     {
         return new static($value);
     }
@@ -120,10 +149,11 @@ abstract class AbstractType implements Type
     /**
      * @inheritDoc
      */
-    public static function from(mixed $value): static
+    public static function type(): string
     {
-        return static::make($value);
+        return strtolower(str_replace('Type', '', static::reflection()->getShortName()));
     }
+
 
     /**
      * @inheritDoc

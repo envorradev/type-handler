@@ -23,6 +23,15 @@ abstract class PrimitiveType extends AbstractType implements Primitive
      */
     public function toString(): StringContract
     {
-        return StringType::from((string) $this->getValue());
+        return StringType::make($this);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function castIncomingValue(mixed $value): mixed
+    {
+        settype($value, static::type());
+        return $value;
     }
 }
