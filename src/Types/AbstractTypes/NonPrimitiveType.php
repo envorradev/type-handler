@@ -38,7 +38,7 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
     /**
      * @inheritDoc
      */
-    public static function fromPrimitive(Primitive $primitive): static
+    public static function fromPrimitive(Primitive $primitive): NonPrimitive
     {
         return static::make($primitive);
     }
@@ -46,9 +46,9 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
     /**
      * @inheritDoc
      */
-    protected function isIncomingValueCorrectType(mixed $value): bool
+    protected function additionalTypeCheck(mixed $value): bool
     {
-        return gettype($value) === static::type() && get_class($value) === static::objectClass();
+        return get_class($value) === static::objectClass();
     }
 
     /**
@@ -60,9 +60,12 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    abstract public static function objectClass(): string;
+    public static function objectClass(): ?string
+    {
+        return null;
+    }
 
     /**
      * @inheritDoc

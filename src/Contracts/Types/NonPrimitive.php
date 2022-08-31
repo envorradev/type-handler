@@ -20,9 +20,9 @@ interface NonPrimitive extends Type
 
     /**
      * @param  Primitive  $primitive
-     * @return static
+     * @return self
      */
-    public static function fromPrimitive(Primitive $primitive): static;
+    public static function fromPrimitive(Primitive $primitive): self;
 
     /**
      * @return class-string<Primitive>

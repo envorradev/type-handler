@@ -21,6 +21,24 @@ abstract class CompoundType extends PrimitiveType implements Compound
      */
     public function __toString(): string
     {
+        return $this->toJson();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function fromJson(string $json): Compound
+    {
+        return static::make(json_decode($json, true));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toJson(): string
+    {
         return json_encode($this->getValue());
     }
+
+
 }

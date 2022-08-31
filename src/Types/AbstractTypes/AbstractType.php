@@ -129,7 +129,16 @@ abstract class AbstractType implements Type
      */
     protected function isIncomingValueCorrectType(mixed $value): bool
     {
-        return gettype($value) === static::type();
+        return gettype($value) === static::type() && $this->additionalTypeCheck($value);
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return bool
+     */
+    protected function additionalTypeCheck(mixed $value): bool
+    {
+        return true;
     }
 
     /**
@@ -161,5 +170,10 @@ abstract class AbstractType implements Type
     public function __toString(): string
     {
         return (string) $this->getValue();
+    }
+
+    public function dump(): void
+    {
+        dump($this);
     }
 }

@@ -9,7 +9,7 @@ use Envorra\TypeHandler\Contracts\Types\Type;
  *
  * @package Envorra\TypeHandler\Contracts
  *
- * @template TFactory
+ * @template T
  */
 interface Factory
 {
@@ -19,7 +19,7 @@ interface Factory
     public function __construct();
 
     /**
-     * @return TFactory
+     * @return T
      */
     public function create(): mixed;
 
@@ -30,13 +30,13 @@ interface Factory
 
     /**
      * @param  mixed  $value
-     * @return $this
+     * @return self
      */
     public function fromValue(mixed $value): self;
 
     /**
      * @param  Type  $type
-     * @return $this
+     * @return self
      */
     public function fromType(Type $type): self;
 
@@ -47,7 +47,7 @@ interface Factory
 
     /**
      * @param  mixed  $value
-     * @return TFactory
+     * @return T
      */
     public static function createFromValue(mixed $value): mixed;
 }
