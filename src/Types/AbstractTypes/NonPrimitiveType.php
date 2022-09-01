@@ -44,19 +44,20 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
     }
 
     /**
-     * @inheritDoc
+     * @param  mixed  $value
+     * @return bool
      */
-    protected function additionalTypeCheck(mixed $value): bool
+    protected function isIncomingValueCorrectType(mixed $value): bool
     {
-        return get_class($value) === static::objectClass();
+        return gettype($value) === static::primitiveType()::type() && $this->additionalTypeCheck($value);
     }
 
     /**
      * @inheritDoc
      */
-    public static function type(): string
+    protected function additionalTypeCheck(mixed $value): bool
     {
-        return static::primitiveType()::type();
+        return get_class($value) === static::objectClass();
     }
 
     /**

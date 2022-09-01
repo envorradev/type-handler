@@ -13,10 +13,30 @@ use Envorra\TypeHandler\Contracts\Types\Type;
  */
 interface Factory
 {
-    /**
-     * Constructor
-     */
     public function __construct();
+
+    /**
+     * @return void
+     */
+    public function init(): void;
+
+    /**
+     * @return static
+     */
+    public function newInstance(): static;
+
+    /**
+     * @param  string  $property
+     * @param  mixed   $value
+     * @return static
+     */
+    public function set(string $property, mixed $value): static;
+
+    /**
+     * @param  string  $property
+     * @return mixed
+     */
+    public function get(string $property): mixed;
 
     /**
      * @return T
@@ -24,30 +44,19 @@ interface Factory
     public function create(): mixed;
 
     /**
-     * @return self
-     */
-    public function newInstance(): self;
-
-    /**
-     * @param  mixed  $value
-     * @return self
-     */
-    public function fromValue(mixed $value): self;
-
-    /**
-     * @param  Type  $type
-     * @return self
-     */
-    public function fromType(Type $type): self;
-
-    /**
+     * @param  string  $property
      * @return mixed
      */
-    public function getValue(): mixed;
+    public function __get(string $property): mixed;
 
     /**
-     * @param  mixed  $value
+     * @param array<string, mixed> $arguments
      * @return T
      */
-    public static function createFromValue(mixed $value): mixed;
+    public static function make(array $arguments = []): mixed;
+
+    /**
+     * @return static
+     */
+    public static function instance(): static;
 }
