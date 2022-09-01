@@ -59,20 +59,10 @@ class TypeFactory extends AbstractFactory
     }
 
     /**
-     * @param  mixed|null   $value
-     * @param  string|null  $type
-     * @return Type|null
+     * @inheritDoc
      */
-    public function create(mixed $value = null, ?string $type = null): ?Type
+    public function create(): mixed
     {
-        if($value) {
-            $this->setValue($value);
-        }
-
-        if($type) {
-            $this->setType($type);
-        }
-
         $typeMap = TypeMapFactory::make([
             'subClass' => $this->classSubType()
         ]);
@@ -103,5 +93,23 @@ class TypeFactory extends AbstractFactory
     public function getValue(): mixed
     {
         return $this->value ?? '';
+    }
+
+    /**
+     * @param  string  $type
+     * @return TType
+     */
+    public static function fromType(string $type): mixed
+    {
+        return static::make(['type' => $type]);
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return TType
+     */
+    public static function fromValue(mixed $value): mixed
+    {
+        return static::make(['value' => $value]);
     }
 }
