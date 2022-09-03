@@ -18,8 +18,9 @@ class NonPrimitiveTypeFactory extends TypeFactory
     /**
      * @inheritDoc
      */
-    protected function classSubType(): string
+    protected static function subType(): string
     {
         return NonPrimitive::class;
     }
+
 }

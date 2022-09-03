@@ -5,7 +5,7 @@ namespace Envorra\TypeHandler\Factories;
 use Envorra\TypeHandler\Contracts\Types\Scalar;
 
 /**
- * ScalarFactory
+ * ScalarTypeFactory
  *
  * @package Envorra\TypeHandler\Factories
  *
@@ -18,7 +18,7 @@ class ScalarTypeFactory extends PrimitiveTypeFactory
     /**
      * @inheritDoc
      */
-    protected function classSubType(): string
+    protected static function subType(): string
     {
         return Scalar::class;
     }

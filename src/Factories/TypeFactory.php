@@ -2,114 +2,78 @@
 
 namespace Envorra\TypeHandler\Factories;
 
+use Envorra\TypeHandler\Contracts\Factory;
 use Envorra\TypeHandler\Contracts\Types\Type;
+use Envorra\TypeHandler\Types\Primitives\StringType;
 
 /**
  * TypeFactory
  *
- * @package Envorra\TypeHandler\Factories
+ * @package Envorra\TypeHandler
  *
- * @template TType of Type
+ * @template T of Type
  *
- * @extends AbstractFactory<Type>
+ * @implements Factory<T>
  */
-class TypeFactory extends AbstractFactory
+class TypeFactory implements Factory
 {
-    protected mixed $value = null;
-
-    protected ?string $type = null;
 
     /**
-     * @return class-string<Type>
+     * @param  string|class-string<T>|null  $type
+     * @param  mixed|null   $value
+     * @return T
      */
-    protected function classSubType(): string
+    public static function create(?string $type = null, mixed $value = null): mixed
+    {
+        $value ??= '';
+        $type ??= gettype($value);
+        $map = TypeMapFactory::create(static::subType());
+
+        /** @var class-string<Type> $class */
+        $class = static::defaultType();
+
+        if(array_key_exists($type, $map)) {
+            $class = $map[$type];
+        } elseif(in_array($type, $map)) {
+            $class = $map[array_search($type, $map)];
+        }
+
+        return $class::make($value);
+    }
+
+
+    /**
+     * @param  string  $type
+     * @return T
+     */
+    public static function createFromType(string $type): mixed
+    {
+        return static::create(type: $type);
+    }
+
+
+    /**
+     * @param  mixed  $value
+     * @return T
+     */
+    public static function createFromValue(mixed $value): mixed
+    {
+        return static::create(value: $value);
+    }
+
+    /**
+     * @return class-string<T>
+     */
+    protected static function subType(): string
     {
         return Type::class;
     }
 
     /**
-     * @param  string  $type
-     * @return $this
+     * @return class-string<T>
      */
-    public function setType(string $type): static
+    protected static function defaultType(): string
     {
-        $type = strtolower($type);
-
-        $this->type = match($type) {
-            'int' => 'integer',
-            'bool' => 'boolean',
-            'str' => 'string',
-            'obj' => 'object',
-            'arr' => 'array',
-            'float','real' => 'double',
-            default => $type,
-        };
-
-        return $this;
-    }
-
-    /**
-     * @param  mixed  $value
-     * @return $this
-     */
-    public function setValue(mixed $value): static
-    {
-        $this->value = $value;
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function create(): mixed
-    {
-        $typeMap = TypeMapFactory::make([
-            'subClass' => $this->classSubType()
-        ]);
-
-        /** @var class-string<Type>|null $class */
-        $class = null;
-
-        if(array_key_exists($this->getType(), $typeMap)) {
-            $class = $typeMap[$this->getType()];
-        } elseif(in_array($this->getType(), $typeMap)) {
-            $class = $typeMap[array_search($this->getType(), $typeMap)];
-        }
-
-        return $class ? $class::make($this->getValue()) : null;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type ?? gettype($this->getValue());
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue(): mixed
-    {
-        return $this->value ?? '';
-    }
-
-    /**
-     * @param  string  $type
-     * @return TType
-     */
-    public static function fromType(string $type): mixed
-    {
-        return static::make(['type' => $type]);
-    }
-
-    /**
-     * @param  mixed  $value
-     * @return TType
-     */
-    public static function fromValue(mixed $value): mixed
-    {
-        return static::make(['value' => $value]);
+        return StringType::class;
     }
 }

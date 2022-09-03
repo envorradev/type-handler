@@ -2,10 +2,7 @@
 
 namespace Envorra\TypeHandler\Factories;
 
-use Exception;
-use Violet\ClassScanner\Scanner;
-use Violet\ClassScanner\TypeDefinition;
-use Envorra\TypeHandler\Providers\Package;
+use Envorra\TypeHandler\Contracts\Factory;
 use Envorra\TypeHandler\Contracts\Types\Type;
 
 /**
@@ -13,59 +10,23 @@ use Envorra\TypeHandler\Contracts\Types\Type;
  *
  * @package Envorra\TypeHandler\Factories
  *
- * @extends AbstractFactory<array>
+ * @implements Factory<array>
  */
-class TypeMapFactory extends AbstractFactory
+class TypeMapFactory implements Factory
 {
-    protected Scanner $scanner;
-
-    protected array $notSettable = [
-        'classes',
-        'types',
-        'scanner',
-    ];
-
-    protected array $types = [];
-
-    protected ?string $subType = null;
-
     /**
-     * @inheritDoc
+     * @param  class-string<Type>  $typeSubClass
+     * @return array<string, class-string>
      */
-    public function init(): void
+    public static function create(string $typeSubClass = Type::class): array
     {
-        $this->scanner = ScannerFactory::make([
-            'scanDirs' => [
-                Package::path('Contracts/Types'),
-                Package::path('Types'),
-            ],
-        ]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function create(): array
-    {
-        if($this->subType) {
-            $this->types = $this->scanner->getSubClasses($this->subType);
-        } else {
-            $this->types = $this->scanner->getClasses(TypeDefinition::TYPE_CLASS);
-        }
-
         $map = [];
 
-        /** @var Type $type */
-        foreach($this->types as $type) {
-            try {
-                $map[$type::type()] = $type;
-            } catch (Exception) {
-                // skip
-            }
+        /** @var class-string<Type> $type */
+        foreach(ScannerFactory::create()->getSubClasses($typeSubClass) as $type)  {
+            $map[$type::type()] = $type;
         }
 
         return $map;
     }
-
-
 }

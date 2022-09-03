@@ -18,7 +18,7 @@ class CompoundTypeFactory extends PrimitiveTypeFactory
     /**
      * @inheritDoc
      */
-    protected function classSubType(): string
+    protected static function subType(): string
     {
         return Compound::class;
     }

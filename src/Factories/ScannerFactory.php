@@ -3,92 +3,57 @@
 namespace Envorra\TypeHandler\Factories;
 
 use Violet\ClassScanner\Scanner;
-use Violet\ClassScanner\TypeDefinition;
 use Envorra\TypeHandler\Contracts\Factory;
-use Violet\ClassScanner\Exception\ParsingException;
+use Envorra\TypeHandler\Providers\Package;
+use Violet\ClassScanner\Contracts\Scanner as ScannerContract;
 
 /**
  * ScannerFactory
  *
  * @package Envorra\TypeHandler\Factories
  *
- * @extends AbstractFactory<Scanner>
+ * @implements Factory<ScannerContract>
  */
-class ScannerFactory extends AbstractFactory
+class ScannerFactory implements Factory
 {
-    protected array $scanDirs = [];
-
-    protected bool $recursive = true;
-
-    protected int $maxRecurseLevels = -1;
-
-    protected Scanner $scanner;
-
-    protected array $notSettable = [
-        'scanner',
-    ];
+    protected ScannerContract $scanner;
 
     /**
-     * @inheritDoc
+     * @param  string[]  $scanDirs
+     * @param  bool   $recursive
+     * @param  int    $maxRecurseLevels
      */
-    public function init(): void
+    protected function __construct(array $scanDirs = [], bool $recursive = true, int $maxRecurseLevels = -1)
     {
-        $this->scanner = new Scanner();
-    }
+        $class = static::scannerClass();
+        $this->scanner = new $class();
 
-    /**
-     * @inheritDoc
-     * @throws ParsingException
-     */
-    public function create(): Scanner
-    {
-        if(!empty($this->scanDirs)) {
-            $this->scanner->scanDirectories($this->scanDirs, $this->recursive, $this->maxRecurseLevels);
+        $this->scanner->scanDirectoriesRecursive([
+            Package::path('Contracts/Types'),
+            Package::path('Types'),
+        ]);
+
+        if(!empty($scanDirs)) {
+            $this->scanner->scanDirectories($scanDirs, $recursive, $maxRecurseLevels);
         }
-
-        return $this->scanner;
     }
 
     /**
-     * @return Scanner
+     * @param  string[]  $scanDirs
+     * @param  bool   $recursive
+     * @param  int    $maxRecurseLevels
+     * @return ScannerContract
      */
-    public function getScanner(): Scanner
+    public static function create(array $scanDirs = [], bool $recursive = true, int $maxRecurseLevels = -1): ScannerContract
     {
-        return $this->get('scanner');
+        return (new self($scanDirs, $recursive, $maxRecurseLevels))->scanner;
     }
 
     /**
-     * @return array
+     * @return class-string
      */
-    public function getScanDirs(): array
+    public static function scannerClass(): string
     {
-        return $this->get('scanDirs');
-    }
-
-    /**
-     * @param  array  $dirs
-     * @return Factory
-     */
-    public function setScanDirs(array $dirs): Factory
-    {
-        return $this->set('scanDirs', $dirs);
-    }
-
-    /**
-     * @param  array  $dirs
-     * @return Factory
-     */
-    public function addScanDirs(array $dirs): Factory
-    {
-        return $this->setScanDirs(array_merge($this->getScanDirs(), $dirs));
-    }
-
-    /**
-     * @param  string  $dir
-     * @return Factory
-     */
-    public function addScanDir(string $dir): Factory
-    {
-        return $this->addScanDirs([$dir]);
+        return Scanner::class;
     }
 }
