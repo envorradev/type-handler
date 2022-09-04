@@ -30,7 +30,7 @@ class JsonHelper
      */
     public static function isJsonable(mixed $value): bool
     {
-        return method_exists($value, 'toJson');
+        return (is_object($value) || is_string($value)) && method_exists($value, 'toJson');
     }
 
     /**
