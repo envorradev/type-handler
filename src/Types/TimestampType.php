@@ -18,6 +18,7 @@ class TimestampType extends NonPrimitiveType
 {
     /**
      * @inheritDoc
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
     protected function castIncomingValue(mixed $value): mixed
     {

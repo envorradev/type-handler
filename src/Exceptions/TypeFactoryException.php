@@ -2,14 +2,12 @@
 
 namespace Envorra\TypeHandler\Exceptions;
 
-use Exception;
-
 /**
- * HandlerException
+ * TypeFactoryException
  *
  * @package Envorra\TypeHandler\Exceptions
  */
-class HandlerException extends Exception
+class TypeFactoryException extends FactoryException
 {
 
 }
