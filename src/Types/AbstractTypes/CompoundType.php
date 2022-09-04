@@ -7,7 +7,7 @@ use Envorra\TypeHandler\Contracts\Types\Compound;
 /**
  * CompoundType
  *
- * @package Envorra\TypeHandler\Types
+ * @package  Envorra\TypeHandler\Types
  *
  * @template TCompound
  *
@@ -19,17 +19,17 @@ abstract class CompoundType extends PrimitiveType implements Compound
     /**
      * @inheritDoc
      */
-    public function __toString(): string
+    public static function fromJson(string $json): Compound
     {
-        return $this->toJson();
+        return static::make(json_decode($json, true));
     }
 
     /**
      * @inheritDoc
      */
-    public static function fromJson(string $json): Compound
+    public function __toString(): string
     {
-        return static::make(json_decode($json, true));
+        return $this->toJson();
     }
 
     /**

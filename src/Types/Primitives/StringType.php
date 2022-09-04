@@ -20,7 +20,7 @@ final class StringType extends PrimitiveType implements StringContract
      */
     public function __construct(mixed $value = null)
     {
-        if($value instanceof Type) {
+        if ($value instanceof Type) {
             $value = (string) $value;
         }
 

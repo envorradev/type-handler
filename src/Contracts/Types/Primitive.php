@@ -5,7 +5,7 @@ namespace Envorra\TypeHandler\Contracts\Types;
 /**
  * @Primitive
  *
- * @package Envorra\TypeHandler\Contracts
+ * @package  Envorra\TypeHandler\Contracts
  *
  * @template TPrimitive
  *

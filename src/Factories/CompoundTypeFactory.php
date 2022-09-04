@@ -7,7 +7,7 @@ use Envorra\TypeHandler\Contracts\Types\Compound;
 /**
  * CompoundTypeFactory
  *
- * @package Envorra\TypeHandler\Factories
+ * @package  Envorra\TypeHandler\Factories
  *
  * @template TCompound of Compound
  *

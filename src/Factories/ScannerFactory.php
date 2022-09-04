@@ -20,8 +20,8 @@ class ScannerFactory implements Factory
 
     /**
      * @param  string[]  $scanDirs
-     * @param  bool   $recursive
-     * @param  int    $maxRecurseLevels
+     * @param  bool      $recursive
+     * @param  int       $maxRecurseLevels
      */
     protected function __construct(array $scanDirs = [], bool $recursive = true, int $maxRecurseLevels = -1)
     {
@@ -33,19 +33,22 @@ class ScannerFactory implements Factory
             Package::path('Types'),
         ]);
 
-        if(!empty($scanDirs)) {
+        if (!empty($scanDirs)) {
             $this->scanner->scanDirectories($scanDirs, $recursive, $maxRecurseLevels);
         }
     }
 
     /**
      * @param  string[]  $scanDirs
-     * @param  bool   $recursive
-     * @param  int    $maxRecurseLevels
+     * @param  bool      $recursive
+     * @param  int       $maxRecurseLevels
      * @return ScannerContract
      */
-    public static function create(array $scanDirs = [], bool $recursive = true, int $maxRecurseLevels = -1): ScannerContract
-    {
+    public static function create(
+        array $scanDirs = [],
+        bool $recursive = true,
+        int $maxRecurseLevels = -1
+    ): ScannerContract {
         return (new self($scanDirs, $recursive, $maxRecurseLevels))->scanner;
     }
 

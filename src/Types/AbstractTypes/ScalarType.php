@@ -7,7 +7,7 @@ use Envorra\TypeHandler\Contracts\Types\Scalar;
 /**
  * ScalarType
  *
- * @package Envorra\TypeHandler\Types
+ * @package  Envorra\TypeHandler\Types
  *
  * @template TScalar
  *

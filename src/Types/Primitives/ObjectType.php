@@ -28,12 +28,11 @@ final class ObjectType extends CompoundType
      */
     public function __toString(): string
     {
-        if($this->getValue() instanceof Stringable) {
+        if ($this->getValue() instanceof Stringable) {
             return (string) $this->getValue();
         }
         return $this->toJson();
     }
-
 
 
 }

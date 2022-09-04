@@ -9,7 +9,7 @@ use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
 /**
  * NonPrimitiveType
  *
- * @package Envorra\TypeHandler\Types\AbstractTypes
+ * @package  Envorra\TypeHandler\Types\AbstractTypes
  *
  * @template TNonPrimitive
  *
@@ -21,43 +21,9 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
     /**
      * @inheritDoc
      */
-    public function toPrimitive(): Primitive
-    {
-        return static::primitiveType()::make($this);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function castIncomingValue(mixed $value): mixed
-    {
-        $class = static::objectClass();
-        return new $class($value);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public static function fromPrimitive(Primitive $primitive): NonPrimitive
     {
         return static::make($primitive);
-    }
-
-    /**
-     * @param  mixed  $value
-     * @return bool
-     */
-    protected function isIncomingValueCorrectType(mixed $value): bool
-    {
-        return gettype($value) === static::primitiveType()::type() && $this->additionalTypeCheck($value);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function additionalTypeCheck(mixed $value): bool
-    {
-        return get_class($value) === static::objectClass();
     }
 
     /**
@@ -74,5 +40,39 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
     public static function primitiveType(): string
     {
         return ObjectType::class;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toPrimitive(): Primitive
+    {
+        return static::primitiveType()::make($this);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function additionalTypeCheck(mixed $value): bool
+    {
+        return get_class($value) === static::objectClass();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function castIncomingValue(mixed $value): mixed
+    {
+        $class = static::objectClass();
+        return new $class($value);
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return bool
+     */
+    protected function isIncomingValueCorrectType(mixed $value): bool
+    {
+        return gettype($value) === static::primitiveType()::type() && $this->additionalTypeCheck($value);
     }
 }

@@ -86,39 +86,16 @@ class TypeFactory implements Factory
     }
 
     /**
-     * @return class-string<T>|null
-     */
-    protected function resolveObjectInMap(): ?string
-    {
-        if($this->type !== 'object') {
-            return null;
-        }
-
-        $class = get_class($this->value);
-        $key = strtolower(class_basename($class));
-
-        if($this->inMap($class)) {
-            return $this->getFromMap($class);
-        }
-
-        if($this->inMap($key)) {
-            return $this->getFromMap($key);
-        }
-
-        return null;
-    }
-
-    /**
      * @return class-string<T>
      * @throws TypeFactoryException
      */
     protected function getType(): string
     {
-        if($class = $this->resolveObjectInMap()) {
+        if ($class = $this->resolveObjectInMap()) {
             return $class;
         }
 
-        if($this->inMap($this->type)) {
+        if ($this->inMap($this->type)) {
             return $this->getFromMap($this->type);
         }
 
@@ -143,5 +120,28 @@ class TypeFactory implements Factory
         /** @var class-string<Type> $type */
         $type = $this->getType();
         return $type::make($this->value);
+    }
+
+    /**
+     * @return class-string<T>|null
+     */
+    protected function resolveObjectInMap(): ?string
+    {
+        if ($this->type !== 'object') {
+            return null;
+        }
+
+        $class = get_class($this->value);
+        $key = strtolower(class_basename($class));
+
+        if ($this->inMap($class)) {
+            return $this->getFromMap($class);
+        }
+
+        if ($this->inMap($key)) {
+            return $this->getFromMap($key);
+        }
+
+        return null;
     }
 }

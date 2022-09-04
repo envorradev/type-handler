@@ -9,7 +9,7 @@ use Envorra\TypeHandler\Contracts\Types\StringContract;
 /**
  * PrimitiveType
  *
- * @package Envorra\TypeHandler\Types
+ * @package  Envorra\TypeHandler\Types
  *
  * @template TPrimitive
  *

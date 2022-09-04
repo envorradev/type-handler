@@ -5,7 +5,7 @@ namespace Envorra\TypeHandler\Contracts\Types;
 /**
  * NonPrimitive
  *
- * @package Envorra\TypeHandler\Contracts
+ * @package  Envorra\TypeHandler\Contracts
  *
  * @template TNonPrimitive
  *
@@ -13,11 +13,6 @@ namespace Envorra\TypeHandler\Contracts\Types;
  */
 interface NonPrimitive extends Type
 {
-    /**
-     * @return Primitive
-     */
-    public function toPrimitive(): Primitive;
-
     /**
      * @param  Primitive  $primitive
      * @return self
@@ -28,4 +23,9 @@ interface NonPrimitive extends Type
      * @return class-string<Primitive>
      */
     public static function primitiveType(): string;
+
+    /**
+     * @return Primitive
+     */
+    public function toPrimitive(): Primitive;
 }

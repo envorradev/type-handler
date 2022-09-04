@@ -2,8 +2,6 @@
 
 namespace Envorra\TypeHandler\Types;
 
-use Envorra\TypeHandler\Contracts\Types\Primitive;
-use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
 use Envorra\TypeHandler\Types\Primitives\IntegerType;
 use Envorra\TypeHandler\Types\AbstractTypes\NonPrimitiveType;
 
@@ -18,11 +16,10 @@ class TimestampType extends NonPrimitiveType
 {
     /**
      * @inheritDoc
-     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
-    protected function castIncomingValue(mixed $value): mixed
+    public static function primitiveType(): string
     {
-        return strtotime($value);
+        return IntegerType::class;
     }
 
     /**
@@ -35,9 +32,10 @@ class TimestampType extends NonPrimitiveType
 
     /**
      * @inheritDoc
+     * @noinspection PhpMixedReturnTypeCanBeReducedInspection
      */
-    public static function primitiveType(): string
+    protected function castIncomingValue(mixed $value): mixed
     {
-        return IntegerType::class;
+        return strtotime($value);
     }
 }

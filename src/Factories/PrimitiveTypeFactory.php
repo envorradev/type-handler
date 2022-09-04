@@ -7,7 +7,7 @@ use Envorra\TypeHandler\Contracts\Types\Primitive;
 /**
  * PrimitiveFactory
  *
- * @package Envorra\TypeHandler\Factories
+ * @package  Envorra\TypeHandler\Factories
  *
  * @template TPrimitive of Primitive
  *

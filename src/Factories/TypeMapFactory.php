@@ -23,7 +23,7 @@ class TypeMapFactory implements Factory
         $map = [];
 
         /** @var class-string<Type> $type */
-        foreach(ScannerFactory::create()->getSubClasses($typeSubClass) as $type)  {
+        foreach (ScannerFactory::create()->getSubClasses($typeSubClass) as $type) {
             $map[$type::type()] = $type;
         }
 

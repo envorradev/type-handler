@@ -7,7 +7,7 @@ use Envorra\TypeHandler\Contracts\Types\Scalar;
 /**
  * ScalarTypeFactory
  *
- * @package Envorra\TypeHandler\Factories
+ * @package  Envorra\TypeHandler\Factories
  *
  * @template TScalar of Scalar
  *

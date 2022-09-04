@@ -5,7 +5,7 @@ namespace Envorra\TypeHandler\Contracts\Types;
 /**
  * Scalar
  *
- * @package Envorra\TypeHandler\Contracts
+ * @package  Envorra\TypeHandler\Contracts
  *
  * @template TScalar
  *

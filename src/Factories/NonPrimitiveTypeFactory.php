@@ -7,7 +7,7 @@ use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
 /**
  * NonPrimitiveTypeFactory
  *
- * @package Envorra\TypeHandler\Factories
+ * @package  Envorra\TypeHandler\Factories
  *
  * @template TNonPrimitive of NonPrimitive
  *
