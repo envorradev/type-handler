@@ -2,6 +2,7 @@
 
 namespace Envorra\TypeHandler\Types\AbstractTypes;
 
+use Envorra\TypeHandler\Helpers\JsonHelper;
 use Envorra\TypeHandler\Contracts\Types\Compound;
 
 /**
@@ -21,7 +22,7 @@ abstract class CompoundType extends PrimitiveType implements Compound
      */
     public static function fromJson(string $json): Compound
     {
-        return static::make(json_decode($json, true));
+        return static::make(JsonHelper::toArray($json));
     }
 
     /**
@@ -37,8 +38,6 @@ abstract class CompoundType extends PrimitiveType implements Compound
      */
     public function toJson(): string
     {
-        return json_encode($this->getValue());
+        return JsonHelper::toJson($this->getValue());
     }
-
-
 }

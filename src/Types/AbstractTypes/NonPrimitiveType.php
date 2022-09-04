@@ -2,6 +2,7 @@
 
 namespace Envorra\TypeHandler\Types\AbstractTypes;
 
+use Envorra\TypeHandler\Helpers\JsonHelper;
 use Envorra\TypeHandler\Contracts\Types\Primitive;
 use Envorra\TypeHandler\Types\Primitives\ObjectType;
 use Envorra\TypeHandler\Contracts\Types\NonPrimitive;
@@ -63,6 +64,10 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
      */
     protected function castIncomingValue(mixed $value): mixed
     {
+        if(JsonHelper::isJson($value)) {
+            return static::fromPrimitive(ObjectType::fromJson($value))->getValue();
+        }
+
         $class = static::objectClass();
         return new $class($value);
     }

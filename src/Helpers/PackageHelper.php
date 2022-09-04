@@ -1,13 +1,13 @@
 <?php
 
-namespace Envorra\TypeHandler\Providers;
+namespace Envorra\TypeHandler\Helpers;
 
 /**
- * Package
+ * PackageHelper
  *
- * @internal
+ * @package Envorra\TypeHandler\Helpers
  */
-class Package
+class PackageHelper
 {
     private const BASE_PATH = __DIR__.'/../..';
 

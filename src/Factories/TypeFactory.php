@@ -131,7 +131,7 @@ class TypeFactory implements Factory
             return null;
         }
 
-        $class = get_class($this->value);
+        $class = get_class((object) $this->value);
         $key = strtolower(class_basename($class));
 
         if ($this->inMap($class)) {

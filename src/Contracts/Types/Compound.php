@@ -2,6 +2,8 @@
 
 namespace Envorra\TypeHandler\Contracts\Types;
 
+use Envorra\TypeHandler\Contracts\Castables\Jsonable;
+
 /**
  * Compound
  *
@@ -11,16 +13,11 @@ namespace Envorra\TypeHandler\Contracts\Types;
  *
  * @extends Primitive<TCompound>
  */
-interface Compound extends Primitive
+interface Compound extends Primitive, Jsonable
 {
     /**
      * @param  string  $json
      * @return self
      */
     public static function fromJson(string $json): self;
-
-    /**
-     * @return string
-     */
-    public function toJson(): string;
 }

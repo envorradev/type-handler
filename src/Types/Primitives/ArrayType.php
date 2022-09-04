@@ -2,6 +2,7 @@
 
 namespace Envorra\TypeHandler\Types\Primitives;
 
+use Envorra\TypeHandler\Helpers\ArrayHelper;
 use Envorra\TypeHandler\Types\AbstractTypes\CompoundType;
 
 /**
@@ -13,5 +14,11 @@ use Envorra\TypeHandler\Types\AbstractTypes\CompoundType;
  */
 final class ArrayType extends CompoundType
 {
-
+    /**
+     * @inheritDoc
+     */
+    protected function castIncomingValue(mixed $value): array
+    {
+        return ArrayHelper::from($value);
+    }
 }

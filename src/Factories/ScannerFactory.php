@@ -4,7 +4,7 @@ namespace Envorra\TypeHandler\Factories;
 
 use Violet\ClassScanner\Scanner;
 use Envorra\TypeHandler\Contracts\Factory;
-use Envorra\TypeHandler\Providers\Package;
+use Envorra\TypeHandler\Helpers\PackageHelper;
 use Violet\ClassScanner\Contracts\Scanner as ScannerContract;
 
 /**
@@ -29,8 +29,9 @@ class ScannerFactory implements Factory
         $this->scanner = new $class();
 
         $this->scanner->scanDirectoriesRecursive([
-            Package::path('Contracts/Types'),
-            Package::path('Types'),
+            PackageHelper::path('Contracts/Types'),
+            PackageHelper::path('Contracts/Castables'),
+            PackageHelper::path('Types'),
         ]);
 
         if (!empty($scanDirs)) {

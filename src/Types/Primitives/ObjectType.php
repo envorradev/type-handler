@@ -2,7 +2,9 @@
 
 namespace Envorra\TypeHandler\Types\Primitives;
 
+use stdClass;
 use Stringable;
+use Envorra\TypeHandler\Helpers\JsonHelper;
 use Envorra\TypeHandler\Contracts\Types\Compound;
 use Envorra\TypeHandler\Types\AbstractTypes\CompoundType;
 
@@ -32,6 +34,24 @@ final class ObjectType extends CompoundType
             return (string) $this->getValue();
         }
         return $this->toJson();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function additionalTypeCheck(mixed $value): bool
+    {
+        return $value instanceof stdClass;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function castIncomingValue(mixed $value): mixed
+    {
+        return JsonHelper::tryToObject($value)
+                ?? JsonHelper::tryToObject(JsonHelper::toJson($value))
+                ?? parent::castIncomingValue($value);
     }
 
 
