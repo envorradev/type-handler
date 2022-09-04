@@ -70,6 +70,10 @@ abstract class AbstractType implements Type
         return (string) $this->getValue();
     }
 
+    /**
+     * @todo remove method
+     * @return void
+     */
     public function dump(): void
     {
         dump($this);
