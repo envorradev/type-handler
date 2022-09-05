@@ -5,7 +5,7 @@ namespace Envorra\TypeHandler\Helpers;
 /**
  * PackageHelper
  *
- * @package Envorra\TypeHandler\Helpers
+ * @internal
  */
 class PackageHelper
 {
