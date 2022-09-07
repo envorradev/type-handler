@@ -18,7 +18,7 @@ class PrimitiveTypeFactory extends TypeFactory
     /**
      * @inheritDoc
      */
-    protected static function subType(): string
+    protected static function typeContract(): string
     {
         return Primitive::class;
     }

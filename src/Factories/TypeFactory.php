@@ -5,6 +5,7 @@ namespace Envorra\TypeHandler\Factories;
 use Envorra\TypeHandler\Contracts\Factory;
 use Envorra\TypeHandler\Contracts\Types\Type;
 use Envorra\TypeHandler\Types\Primitives\StringType;
+use Envorra\TypeHandler\Types\Primitives\ObjectType;
 use Envorra\TypeHandler\Exceptions\TypeFactoryException;
 
 /**
@@ -23,10 +24,11 @@ class TypeFactory implements Factory
     /**
      * @param  string  $type
      * @param  mixed   $value
+     * @param  class-string  $subType
      */
-    protected function __construct(protected string $type, protected mixed $value)
+    public function __construct(protected string $type, protected mixed $value, protected string $subType)
     {
-        $this->map = TypeMapFactory::create(static::subType());
+        $this->map = TypeMapFactory::create($this->subType);
     }
 
     /**
@@ -37,7 +39,15 @@ class TypeFactory implements Factory
      */
     public static function create(?string $type = null, mixed $value = ''): mixed
     {
-        return (new self($type ?? gettype($value), $value))->make();
+        try {
+            return (new self($type ?? gettype($value), $value, static::typeContract()))->make();
+        } catch (TypeFactoryException $exception) {
+            if($type && $type !== gettype($value) && $exception->getMessage() === $type.' is not a valid type.') {
+                return (new self(gettype($value), $value, static::typeContract()))->make();
+            }
+
+            throw $exception;
+        }
     }
 
     /**
@@ -71,7 +81,7 @@ class TypeFactory implements Factory
     /**
      * @return class-string<T>
      */
-    protected static function subType(): string
+    protected static function typeContract(): string
     {
         return Type::class;
     }
@@ -99,7 +109,7 @@ class TypeFactory implements Factory
             return $this->getFromMap($this->type);
         }
 
-        throw new TypeFactoryException($this->type.' is not found.');
+        throw new TypeFactoryException($this->type.' is not a valid type.');
     }
 
     /**
@@ -127,19 +137,19 @@ class TypeFactory implements Factory
      */
     protected function resolveObjectInMap(): ?string
     {
-        if ($this->type !== 'object') {
-            return null;
-        }
+        if ($this->type === 'object' || is_object($this->value)) {
+            $class = get_class((object) $this->value);
+            $key = strtolower(class_basename($class));
 
-        $class = get_class((object) $this->value);
-        $key = strtolower(class_basename($class));
+            if ($this->inMap($class)) {
+                return $this->getFromMap($class);
+            }
 
-        if ($this->inMap($class)) {
-            return $this->getFromMap($class);
-        }
+            if ($this->inMap($key)) {
+                return $this->getFromMap($key);
+            }
 
-        if ($this->inMap($key)) {
-            return $this->getFromMap($key);
+            return ObjectType::class;
         }
 
         return null;
