@@ -2,7 +2,7 @@
 
 namespace Envorra\TypeHandler\Contracts\Types;
 
-use Envorra\TypeHandler\Contracts\Castables\Jsonable;
+use Envorra\Castables\Jsonable;
 
 /**
  * Compound

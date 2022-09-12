@@ -8,15 +8,15 @@
     ],
     "require": {
         "php": "^8.1",
-        "illuminate/collections": "^9",
-        "taylornetwork/class-scanner": "*",
-        "envorradev/file-class-resolver": "^0.1"
+        "envorradev/file-class-resolver": "^0.1",
+        "envorradev/maps": "dev-master",
+        "envorradev/castables": "dev-master",
+        "taylornetwork/class-scanner": "dev-master"
     },
     "require-dev": {
-        "orchestra/testbench": "*",
-        "ramsey/composer-repl": "*",
-        "phpstan/phpstan": "*",
-        "illuminate/support": "^9"
+        "orchestra/testbench": "^7.7",
+        "ramsey/composer-repl": "^1.4",
+        "phpstan/phpstan": "^1.8"
     },
     "license": "MIT",
     "autoload": {
@@ -35,7 +35,7 @@
             "email": "15961687+samueljtaylor@users.noreply.github.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "config": {
         "allow-plugins": {
             "ramsey/composer-repl": true

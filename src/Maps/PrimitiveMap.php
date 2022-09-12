@@ -2,17 +2,17 @@
 
 namespace Envorra\TypeHandler\Maps;
 
-
-use Envorra\TypeHandler\Exceptions\MapException;
+use Envorra\Maps\AbstractStaticMap;
+use Envorra\Maps\Exceptions\MapItemNotFound;
 
 /**
  * PrimitiveMap
  *
  * @package Envorra\TypeHandler\Maps
  *
- * @extends StaticMap<string>
+ * @extends AbstractStaticMap<string>
  */
-class PrimitiveMap extends StaticMap
+class PrimitiveMap extends AbstractStaticMap
 {
     /**
      * @inheritDoc
@@ -67,7 +67,7 @@ class PrimitiveMap extends StaticMap
             }
         }
 
-        throw new MapException($item.' could not be converted to valid type.');
+        throw new MapItemNotFound();
     }
 
 
