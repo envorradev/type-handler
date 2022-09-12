@@ -2,9 +2,9 @@
 
 namespace Envorra\TypeHandler\Tests\Factories;
 
+use Envorra\TypeHandler\Tests\TestCase;
 use Violet\ClassScanner\Contracts\Scanner;
 use Envorra\TypeHandler\Factories\ScannerFactory;
-use Envorra\TypeHandler\Tests\TestCase;
 
 /**
  * @coversDefaultClass \Envorra\TypeHandler\Factories\ScannerFactory

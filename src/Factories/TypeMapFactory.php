@@ -4,7 +4,6 @@ namespace Envorra\TypeHandler\Factories;
 
 use Illuminate\Support\Str;
 use Envorra\TypeHandler\Maps\TypeMap;
-use Envorra\TypeHandler\Maps\UuidMap;
 use Envorra\TypeHandler\Contracts\Factory;
 use Envorra\TypeHandler\Contracts\Types\Type;
 
@@ -23,9 +22,9 @@ class TypeMapFactory implements Factory
     public static function create(string $typeSubClass = Type::class): TypeMap
     {
         $map = [
-            'type'     => [],
+            'type' => [],
             'basename' => [],
-            'class'    => [],
+            'class' => [],
         ];
 
         /** @var class-string<Type> $class */

@@ -5,7 +5,7 @@ namespace Envorra\TypeHandler\Contracts;
 /**
  * StaticMap
  *
- * @package Envorra\TypeHandler\Contracts
+ * @package  Envorra\TypeHandler\Contracts
  *
  * @template T
  *

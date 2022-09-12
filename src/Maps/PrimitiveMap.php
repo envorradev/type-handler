@@ -28,19 +28,19 @@ class PrimitiveMap extends StaticMap
                 'bool',
                 'b',
             ],
-            'string'  => [
+            'string' => [
                 'str',
                 's',
             ],
-            'array'   => [
+            'array' => [
                 'arr',
                 'a',
             ],
-            'object'  => [
+            'object' => [
                 'obj',
                 'o',
             ],
-            'double'  => [
+            'double' => [
                 'dbl',
                 'd',
                 'float',
@@ -57,12 +57,12 @@ class PrimitiveMap extends StaticMap
      */
     public function findOrFail(mixed $item): mixed
     {
-        if(array_key_exists($item, $this->map)) {
+        if (array_key_exists($item, $this->map)) {
             return $item;
         }
 
-        foreach(array_keys($this->map) as $primitive) {
-            if(in_array($item, $this->map[$primitive])) {
+        foreach (array_keys($this->map) as $primitive) {
+            if (in_array($item, $this->map[$primitive])) {
                 return $primitive;
             }
         }

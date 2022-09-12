@@ -1,10 +1,11 @@
-<?php
+<?php /** @noinspection SpellCheckingInspection */
 
 namespace Envorra\TypeHandler\Tests\Helpers;
 
+use stdClass;
 use Illuminate\Support\Collection;
-use Envorra\TypeHandler\Helpers\JsonHelper;
 use Envorra\TypeHandler\Tests\TestCase;
+use Envorra\TypeHandler\Helpers\JsonHelper;
 use Envorra\TypeHandler\Contracts\Castables\Jsonable;
 
 /**
@@ -50,7 +51,7 @@ class JsonHelperTest extends TestCase
         $this->assertTrue(JsonHelper::isJsonable($classWithInterface));
         $this->assertTrue(JsonHelper::isJsonable($classWithMethodOnly));
         $this->assertTrue(JsonHelper::isJsonable(new Collection()));
-        $this->assertFalse(JsonHelper::isJsonable(new \stdClass()));
+        $this->assertFalse(JsonHelper::isJsonable(new stdClass()));
         $this->assertFalse(JsonHelper::isJsonable([]));
     }
 
@@ -81,29 +82,13 @@ class JsonHelperTest extends TestCase
     {
         $this->assertEquals('["regular","array"]', JsonHelper::toJson([
             'regular',
-            'array'
+            'array',
         ]));
 
         $this->assertEquals('{"assoc":"array","key":"value"}', JsonHelper::toJson([
             'assoc' => 'array',
             'key' => 'value',
         ]));
-    }
-
-    /**
-     * @test
-     * @covers ::toJson
-     */
-    public function it_can_execute_toJson_from_object(): void
-    {
-        $this->assertEquals('{"object":"value"}', JsonHelper::toJson((object) ['object' => 'value']));
-
-        $this->assertEquals('{"propOne":"string 1","propTwo":100}',
-            JsonHelper::toJson(new class {
-                public string $propOne = 'string 1';
-                public int $propTwo = 100;
-            })
-        );
     }
 
     /**
@@ -130,6 +115,22 @@ class JsonHelperTest extends TestCase
 
         $this->assertNotEquals(JsonHelper::toJson($jsonable), json_encode($jsonable));
         $this->assertEquals('{"item 1":"value 1","item 2":"value 2"}', JsonHelper::toJson($jsonable));
+    }
+
+    /**
+     * @test
+     * @covers ::toJson
+     */
+    public function it_can_execute_toJson_from_object(): void
+    {
+        $this->assertEquals('{"object":"value"}', JsonHelper::toJson((object) ['object' => 'value']));
+
+        $this->assertEquals('{"propOne":"string 1","propTwo":100}',
+            JsonHelper::toJson(new class {
+                public string $propOne = 'string 1';
+                public int $propTwo = 100;
+            })
+        );
     }
 
     /**

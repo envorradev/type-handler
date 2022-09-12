@@ -2,6 +2,7 @@
 
 namespace Envorra\TypeHandler\Tests\Helpers;
 
+use stdClass;
 use Illuminate\Support\Collection;
 use Envorra\TypeHandler\Tests\TestCase;
 use Envorra\TypeHandler\Helpers\ArrayHelper;
@@ -42,11 +43,12 @@ class ArrayHelperTest extends TestCase
      * @test
      * @covers ::fromObject
      */
-    public function it_can_execute_fromObject_with_stdClass(): void
+    public function it_can_execute_fromObject_with_non_arrayable(): void
     {
-        $object = new \stdClass();
-        $object->one = 'val one';
-        $object->two = 'val two';
+        $object = new class {
+            public string $one = 'val one';
+            public string $two = 'val two';
+        };
 
         $this->assertEquals([
             'one' => 'val one',
@@ -58,12 +60,11 @@ class ArrayHelperTest extends TestCase
      * @test
      * @covers ::fromObject
      */
-    public function it_can_execute_fromObject_with_non_arrayable(): void
+    public function it_can_execute_fromObject_with_stdClass(): void
     {
-        $object = new class {
-            public string $one = 'val one';
-            public string $two = 'val two';
-        };
+        $object = new stdClass();
+        $object->one = 'val one';
+        $object->two = 'val two';
 
         $this->assertEquals([
             'one' => 'val one',
@@ -86,17 +87,6 @@ class ArrayHelperTest extends TestCase
      * @test
      * @covers ::from
      */
-    public function it_can_execute_from_with_object(): void
-    {
-        $array = ['one' => 'val'];
-
-        $this->assertEquals($array, ArrayHelper::from((object) $array));
-    }
-
-    /**
-     * @test
-     * @covers ::from
-     */
     public function it_can_execute_from_with_json(): void
     {
         $json = '{"one":"val 1","two":"val 2"}';
@@ -105,6 +95,17 @@ class ArrayHelperTest extends TestCase
             'one' => 'val 1',
             'two' => 'val 2',
         ], ArrayHelper::from($json));
+    }
+
+    /**
+     * @test
+     * @covers ::from
+     */
+    public function it_can_execute_from_with_object(): void
+    {
+        $array = ['one' => 'val'];
+
+        $this->assertEquals($array, ArrayHelper::from((object) $array));
     }
 
     /**
@@ -125,8 +126,8 @@ class ArrayHelperTest extends TestCase
     public function it_can_execute_isArray_method(): void
     {
         $this->assertTrue(ArrayHelper::isArray([]));
-        $this->assertTrue(ArrayHelper::isArray(array()));
-        $this->assertFalse(ArrayHelper::isArray(new \stdClass()));
+        $this->assertTrue(ArrayHelper::isArray([]));
+        $this->assertFalse(ArrayHelper::isArray(new stdClass()));
         $this->assertFalse(ArrayHelper::isArray('string'));
         $this->assertFalse(ArrayHelper::isArray(10));
     }
@@ -155,7 +156,7 @@ class ArrayHelperTest extends TestCase
         $this->assertTrue(ArrayHelper::isArrayable($classWithMethodOnly));
 
         $this->assertTrue(ArrayHelper::isArrayable(new Collection()));
-        $this->assertFalse(ArrayHelper::isArrayable(new \stdClass()));
+        $this->assertFalse(ArrayHelper::isArrayable(new stdClass()));
         $this->assertFalse(ArrayHelper::isArrayable([]));
     }
 

@@ -2,9 +2,9 @@
 
 namespace Envorra\TypeHandler\Tests\Factories;
 
+use stdClass;
 use Carbon\Carbon;
-use Envorra\TypeHandler\Types\DateType;
-use Envorra\TypeHandler\Types\CollectionType;
+use Envorra\TypeHandler\Tests\TestCase;
 use Envorra\TypeHandler\Types\Primitives\ArrayType;
 use Envorra\TypeHandler\Types\Primitives\StringType;
 use Envorra\TypeHandler\Types\Primitives\DoubleType;
@@ -12,7 +12,6 @@ use Envorra\TypeHandler\Types\Primitives\ObjectType;
 use Envorra\TypeHandler\Types\Primitives\IntegerType;
 use Envorra\TypeHandler\Types\Primitives\BooleanType;
 use Envorra\TypeHandler\Factories\PrimitiveTypeFactory;
-use Envorra\TypeHandler\Tests\TestCase;
 use Envorra\TypeHandler\Exceptions\TypeFactoryException;
 
 /**
@@ -48,7 +47,7 @@ class PrimitiveTypeFactoryTest extends TestCase
         $this->assertInstanceOf(DoubleType::class, PrimitiveTypeFactory::createFromValue(1.5));
         $this->assertInstanceOf(BooleanType::class, PrimitiveTypeFactory::createFromValue(false));
         $this->assertInstanceOf(ArrayType::class, PrimitiveTypeFactory::createFromValue([]));
-        $this->assertInstanceOf(ObjectType::class, PrimitiveTypeFactory::createFromValue(new \stdClass()));
+        $this->assertInstanceOf(ObjectType::class, PrimitiveTypeFactory::createFromValue(new stdClass()));
     }
 
     /**

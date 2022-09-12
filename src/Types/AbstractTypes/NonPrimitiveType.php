@@ -64,7 +64,7 @@ abstract class NonPrimitiveType extends AbstractType implements NonPrimitive
      */
     protected function castIncomingValue(mixed $value): mixed
     {
-        if(JsonHelper::isJson($value)) {
+        if (JsonHelper::isJson($value)) {
             return static::fromPrimitive(ObjectType::fromJson($value))->getValue();
         }
 

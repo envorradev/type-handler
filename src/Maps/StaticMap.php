@@ -9,7 +9,7 @@ use Envorra\TypeHandler\Contracts\StaticMap as StaticMapContract;
 /**
  * StaticMap
  *
- * @package Envorra\TypeHandler\Maps
+ * @package  Envorra\TypeHandler\Maps
  *
  * @template T
  *
@@ -22,11 +22,15 @@ abstract class StaticMap extends Map implements StaticMapContract
     {
         parent::__construct(static::defineMap());
     }
-    
+
     /**
-     * @return array
+     * @param  mixed  $item
+     * @return T|null
      */
-    abstract protected static function defineMap(): array;
+    public static function get(mixed $item): mixed
+    {
+        return (new static)->find($item);
+    }
 
     /**
      * @param  mixed  $item
@@ -39,11 +43,7 @@ abstract class StaticMap extends Map implements StaticMapContract
     }
 
     /**
-     * @param  mixed  $item
-     * @return T|null
+     * @return array
      */
-    public static function get(mixed $item): mixed
-    {
-        return (new static)->find($item);
-    }
+    abstract protected static function defineMap(): array;
 }

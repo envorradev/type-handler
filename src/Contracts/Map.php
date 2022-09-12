@@ -10,17 +10,12 @@ use Envorra\TypeHandler\Contracts\Castables\Stringable;
 /**
  * Map
  *
- * @package Envorra\TypeHandler\Contracts
+ * @package  Envorra\TypeHandler\Contracts
  *
  * @template T
  */
 interface Map extends Arrayable, Jsonable, Stringable
 {
-    /**
-     * @return array
-     */
-    public function getMap(): array;
-
     /**
      * @param  mixed  $item
      * @return string|T|null
@@ -33,4 +28,9 @@ interface Map extends Arrayable, Jsonable, Stringable
      * @throws MapException
      */
     public function findOrFail(mixed $item): mixed;
+
+    /**
+     * @return array
+     */
+    public function getMap(): array;
 }

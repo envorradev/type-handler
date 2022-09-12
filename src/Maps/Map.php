@@ -9,7 +9,7 @@ use Envorra\TypeHandler\Traits\StringViaJsonViaArray;
 /**
  * Map
  *
- * @package Envorra\TypeHandler\Maps
+ * @package  Envorra\TypeHandler\Maps
  *
  * @template T
  *
@@ -24,14 +24,7 @@ class Map implements MapContract
      */
     public function __construct(
         protected array $map = [],
-    ) {}
-
-    /**
-     * @inheritDoc
-     */
-    public function getMap(): array
-    {
-        return $this->map;
+    ) {
     }
 
     /**
@@ -51,15 +44,23 @@ class Map implements MapContract
      */
     public function findOrFail(mixed $item): mixed
     {
-        if(in_array($item, $this->map)) {
+        if (in_array($item, $this->map)) {
             return $this->map[array_search($item, $this->map)];
         }
 
-        if(array_key_exists($item, $this->map)) {
+        if (array_key_exists($item, $this->map)) {
             return $this->map[$item];
         }
 
         throw new MapException('Item not found!');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMap(): array
+    {
+        return $this->map;
     }
 
     /**

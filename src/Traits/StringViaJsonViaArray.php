@@ -10,6 +10,14 @@ namespace Envorra\TypeHandler\Traits;
 trait StringViaJsonViaArray
 {
     /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toString();
+    }
+
+    /**
      * @return array
      */
     abstract public function toArray(): array;
@@ -28,13 +36,5 @@ trait StringViaJsonViaArray
     public function toString(): string
     {
         return $this->toJson();
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->toString();
     }
 }

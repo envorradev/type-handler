@@ -18,15 +18,6 @@ class TypeMap extends UuidMap
      * @param  mixed  $item
      * @return string|null
      */
-    public function getType(mixed $item): ?string
-    {
-        return $this->findItem($item, 'type');
-    }
-
-    /**
-     * @param  mixed  $item
-     * @return string|null
-     */
     public function getBasename(mixed $item): ?string
     {
         return $this->findItem($item, 'basename');
@@ -42,13 +33,22 @@ class TypeMap extends UuidMap
     }
 
     /**
+     * @param  mixed  $item
+     * @return string|null
+     */
+    public function getType(mixed $item): ?string
+    {
+        return $this->findItem($item, 'type');
+    }
+
+    /**
      * @param  mixed   $item
      * @param  string  $key
      * @return mixed
      */
     protected function findItem(mixed $item, string $key): mixed
     {
-        if(is_string($item)) {
+        if (is_string($item)) {
             return $this->findIgnoreCase($item, $key);
         }
         return $this->find($item, $key);

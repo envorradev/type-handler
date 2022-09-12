@@ -71,8 +71,8 @@ abstract class AbstractType implements Type
     }
 
     /**
-     * @todo remove method
      * @return void
+     * @todo remove method
      */
     public function dump(): void
     {

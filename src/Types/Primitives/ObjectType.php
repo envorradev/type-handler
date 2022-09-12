@@ -50,8 +50,8 @@ final class ObjectType extends CompoundType
     protected function castIncomingValue(mixed $value): mixed
     {
         return JsonHelper::tryToObject($value)
-                ?? JsonHelper::tryToObject(JsonHelper::toJson($value))
-                ?? parent::castIncomingValue($value);
+            ?? JsonHelper::tryToObject(JsonHelper::toJson($value))
+            ?? parent::castIncomingValue($value);
     }
 
 
