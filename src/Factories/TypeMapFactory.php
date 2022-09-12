@@ -2,6 +2,9 @@
 
 namespace Envorra\TypeHandler\Factories;
 
+use Illuminate\Support\Str;
+use Envorra\TypeHandler\Maps\TypeMap;
+use Envorra\TypeHandler\Maps\UuidMap;
 use Envorra\TypeHandler\Contracts\Factory;
 use Envorra\TypeHandler\Contracts\Types\Type;
 
@@ -10,23 +13,29 @@ use Envorra\TypeHandler\Contracts\Types\Type;
  *
  * @package Envorra\TypeHandler\Factories
  *
- * @implements Factory<array>
+ * @implements Factory<TypeMap>
  */
 class TypeMapFactory implements Factory
 {
     /**
      * @param  class-string<Type>  $typeSubClass
-     * @return array<string, class-string>
      */
-    public static function create(string $typeSubClass = Type::class): array
+    public static function create(string $typeSubClass = Type::class): TypeMap
     {
-        $map = [];
+        $map = [
+            'type'     => [],
+            'basename' => [],
+            'class'    => [],
+        ];
 
-        /** @var class-string<Type> $type */
-        foreach (ScannerFactory::create()->getSubClasses($typeSubClass) as $type) {
-            $map[$type::type()] = $type;
+        /** @var class-string<Type> $class */
+        foreach (ScannerFactory::create()->getSubClasses($typeSubClass) as $class) {
+            $uuid = Str::uuid()->toString();
+            $map['type'][$uuid] = $class::type();
+            $map['basename'][$uuid] = class_basename($class);
+            $map['class'][$uuid] = $class;
         }
 
-        return $map;
+        return new TypeMap($map);
     }
 }
