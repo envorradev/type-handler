@@ -6,7 +6,7 @@ use stdClass;
 use Illuminate\Support\Collection;
 use Envorra\TypeHandler\Tests\TestCase;
 use Envorra\TypeHandler\Helpers\JsonHelper;
-use Envorra\TypeHandler\Contracts\Castables\Jsonable;
+use Envorra\Castables\Jsonable;
 
 /**
  * @coversDefaultClass \Envorra\TypeHandler\Helpers\JsonHelper

@@ -3,7 +3,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../TaylorNetwork/class-scanner"
+            "url": "../class-finder"
         }
     ],
     "require": {
@@ -11,7 +11,7 @@
         "envorradev/file-class-resolver": "^0.1",
         "envorradev/maps": "dev-master",
         "envorradev/castables": "dev-master",
-        "taylornetwork/class-scanner": "dev-master"
+        "envorradev/class-finder": "dev-main"
     },
     "require-dev": {
         "orchestra/testbench": "^7.7",

@@ -6,7 +6,7 @@ use stdClass;
 use Illuminate\Support\Collection;
 use Envorra\TypeHandler\Tests\TestCase;
 use Envorra\TypeHandler\Helpers\ArrayHelper;
-use Envorra\TypeHandler\Contracts\Castables\Arrayable;
+use Envorra\Castables\Arrayable;
 
 /**
  * @coversDefaultClass \Envorra\TypeHandler\Helpers\ArrayHelper

@@ -2,9 +2,9 @@
 
 namespace Envorra\TypeHandler\Maps;
 
+use Envorra\Maps\UuidMap;
 use Envorra\Maps\Contracts\Map;
 use Envorra\TypeHandler\Contracts\Types\Type;
-use Envorra\Maps\UuidMap;
 
 /**
  * TypeMap
@@ -15,6 +15,15 @@ use Envorra\Maps\UuidMap;
  */
 class TypeMap extends UuidMap
 {
+    /**
+     * @param  Map  $map
+     * @return TypeMap
+     */
+    public static function fromMap(Map $map): TypeMap
+    {
+        return new TypeMap($map->getMap());
+    }
+
     /**
      * @param  mixed  $item
      * @return string|null
@@ -53,14 +62,5 @@ class TypeMap extends UuidMap
             return $this->findIgnoreCase($item, $key);
         }
         return $this->find($item, $key);
-    }
-
-    /**
-     * @param  Map  $map
-     * @return TypeMap
-     */
-    public static function fromMap(Map $map): TypeMap
-    {
-        return new TypeMap($map->getMap());
     }
 }
